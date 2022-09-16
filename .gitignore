@@ -1,3 +1,6 @@
+build/*
+.reach/*
+.vscode/*
 # Logs
 logs
 *.log
