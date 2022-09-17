@@ -9,6 +9,7 @@ const [ isResult, NO_WINS, A_WINS, B_WINS, DRAW,  ] = makeEnum(4);
 // 0 = none, 1 = B wins, 2 = draw , 3 = A wins
 const winner = (handAlice, guessAlice, handBob, guessBob) => {
   const total = handAlice + handBob;
+
   if ( guessAlice == total && guessBob == total  ) {
       // draw
       return DRAW
@@ -47,12 +48,11 @@ forall(UInt, handAlice =>
 ))));
 
 
-
-
 // Setup common functions
 const commonInteract = {
   ...hasRandom,
   reportResult: Fun([UInt], Null),
+  reportHands: Fun([UInt, UInt, UInt, UInt], Null),
   informTimeout: Fun([], Null),
   getHand: Fun([], UInt),
   getGuess: Fun([], UInt),
@@ -103,6 +103,7 @@ export const main = Reach.App(() => {
    while ( result == DRAW || result == NO_WINS ) {
     commit();
 
+
   // getHand ( 0 to 5)
   // gettotal ( 0 to 10 )
   // Get finger and total from frontend
@@ -148,9 +149,15 @@ export const main = Reach.App(() => {
   checkCommitment(commitAlice1, saltAlice1, handAlice);
   checkCommitment(commitAlice2, saltAlice2, guessAlice);
 
-  result = winner(handAlice, guessAlice, handBob, guessBob);
   
+  each([A, B], () => {
+    interact.reportHands(handAlice, guessAlice, handBob, guessBob);
+  });
+
+  result = winner(handAlice, guessAlice, handBob, guessBob);
   continue;
+
+
 }
 
 each([A, B], () => {

@@ -15,6 +15,13 @@ const OUTCOME = ['NO_WINS', 'Alice WINS', 'Bob WINS', 'DRAW', ];
 const commonInteract = {
   ...stdlib.hasRandom,
   reportResult:  (result) => { console.log(`The result is: ${OUTCOME[result]}`)},
+  //interact.reportHands(handAlice, guessAlice, handBob, guessBob, total );
+
+  reportHands:  (A,aGuess,B, bGuess) => { 
+    console.log(`*** Alice played hand: ${toSU(A)}, guess: ${toSU(aGuess)} `)
+    console.log(`*** Bob played hand: ${toSU(B)}, guess: ${toSU(bGuess)} `)
+    console.log(`*** Total fingers : ${toSU( parseInt(A)+parseInt(B) )}`)
+  },
   informTimeout: () => {  console.log(`There was a timeout.`); 
                             process.exit(1);
                           },
