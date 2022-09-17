@@ -1,6 +1,7 @@
 build/*
 .reach/*
 .vscode/*
+Dockerfile
 # Logs
 logs
 *.log
