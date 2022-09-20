@@ -156,10 +156,9 @@ export const main = Reach.App(() => {
 
   result = winner(handAlice, guessAlice, handBob, guessBob);
   continue;
-
-
 }
 
+assert(result == A_WINS || result == B_WINS);
 each([A, B], () => {
   interact.reportResult(result);
 });
